@@ -1,6 +1,6 @@
 SELECT 
     u.usuario AS usuario,
-    IF(YEAR(h.data_reproducao) = 2021,
+    IF(MAX(YEAR(h.data_reproducao) = 2021),
         'Usuário ativo',
         'Usuário inativo') AS condicao_usuario
 FROM
