@@ -1,4 +1,6 @@
-CREATE DATABASE IF NOT EXISTS SpotifyClone;
+DROP DATABASE IF EXISTS SpotifyClone;
+
+CREATE DATABASE SpotifyClone;
 
 CREATE TABLE SpotifyClone.planos (
     plano_id INT PRIMARY KEY AUTO_INCREMENT,
