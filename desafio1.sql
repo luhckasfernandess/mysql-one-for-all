@@ -13,7 +13,7 @@ CREATE TABLE SpotifyClone.usuarios (
     plano_id INT NOT NULL,
     data_assinatura DATE NOT NULL,
     FOREIGN KEY (plano_id)
-        REFERENCES planos (plano_id)
+        REFERENCES SpotifyClone.planos (plano_id)
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.artistas (
@@ -27,28 +27,26 @@ CREATE TABLE SpotifyClone.albuns (
     artista_id INT NOT NULL,
     ano_lancamento YEAR NOT NULL,
     FOREIGN KEY (artista_id)
-        REFERENCES artistas (artista_id)
+        REFERENCES SpotifyClone.artistas (artista_id)
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.seguidores (
     usuario_id INT NOT NULL,
     artista_id INT NOT NULL,
     FOREIGN KEY (usuario_id)
-        REFERENCES usuarios (usuario_id),
+        REFERENCES SpotifyClone.usuarios (usuario_id),
     FOREIGN KEY (artista_id)
-        REFERENCES artistas (artista_id)
+        REFERENCES SpotifyClone.artistas (artista_id),
+    CONSTRAINT PRIMARY KEY (usuario_id , artista_id)
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.cancoes (
     cancao_id INT PRIMARY KEY AUTO_INCREMENT,
     cancao VARCHAR(50) NOT NULL,
     album_id INT NOT NULL,
-    artista_id INT NOT NULL,
     duracao_segundos INT NOT NULL,
     FOREIGN KEY (album_id)
-        REFERENCES albuns (album_id),
-    FOREIGN KEY (artista_id)
-        REFERENCES artistas (artista_id)
+        REFERENCES SpotifyClone.albuns (album_id)
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.historico (
@@ -56,9 +54,10 @@ CREATE TABLE SpotifyClone.historico (
     cancao_id INT NOT NULL,
     data_reproducao DATETIME NOT NULL,
     FOREIGN KEY (usuario_id)
-        REFERENCES usuarios (usuario_id),
+        REFERENCES SpotifyClone.usuarios (usuario_id),
     FOREIGN KEY (cancao_id)
-        REFERENCES cancoes (cancao_id)
+        REFERENCES SpotifyClone.cancoes (cancao_id),
+	CONSTRAINT PRIMARY KEY (usuario_id , cancao_id)
 )  ENGINE=INNODB;
 
 INSERT INTO SpotifyClone.planos (plano, valor_plano)
@@ -128,48 +127,48 @@ VALUES
 (10, 2),
 (10, 6);
 
-INSERT INTO SpotifyClone.cancoes (cancao, album_id, artista_id, duracao_segundos)
+INSERT INTO SpotifyClone.cancoes (cancao, album_id, duracao_segundos)
 VALUES
-('Soul For Us', 1, 1, 200),
-('Reflections Of Magic', 1, 1, 163),
-('Dance With Her Own', 1, 1, 116),
-('Troubles Of My Inner Fire', 2, 1, 203),
-('Time Fireworks', 2, 1, 152),
-('Magic Circus', 3, 2, 105),
-('Honey, So Do I', 3, 2, 207),
-("Sweetie, Let's Go Wild", 3, 2, 139),
-('She Knows', 3, 2, 244),
-('Fantasy For Me', 4, 3, 100),
-('Celebration Of More', 4, 3, 146),
-('Rock His Everything', 4, 3, 223),
-('Home Forever', 4, 3, 231),
-('Diamond Power', 4, 3, 241),
-("Let's Be Silly", 4, 3, 132),
-('Thang Of Thunder', 5, 4, 240),
-('Words Of Her Life', 5, 4, 185),
-('Without My Streets', 5, 4, 176),
-('Need Of The Evening', 6, 4, 190),
-('History Of My Roses', 6, 4, 222),
-('Without My Love', 6, 4, 111),
-('Walking And Game', 6, 4, 123),
-('Young And Father', 6, 4, 197),
-('Finding My Traditions', 7, 5, 179),
-('Walking And Man', 7, 5, 229),
-('Hard And Time', 7, 5, 135),
-("Honey, I'm A Lone Wolf", 7, 5, 150),
-("She Thinks I Won't Stay Tonight", 8, 5, 166),
-("He Heard You're Bad For Me", 8, 5, 154),
-("He Hopes We Can't Stay", 8, 5, 210),
-('I Know I Know', 8, 5, 117),
-("He's Walking Away", 9, 5, 159),
-("He's Trouble", 9, 5, 138),
-('I Heard I Want To Bo Alone', 9, 5, 120),
-('I Ride Alone', 9, 5, 151),
-('Honey', 10, 6, 79),
-('You Cheated On Me', 10, 6, 95),
-("Wouldn't It Be Nice", 10, 6, 213),
-('Baby', 10, 6, 136),
-('You Make Me Feel So..', 10, 6, 83);
+('Soul For Us', 1, 200),
+('Reflections Of Magic', 1, 163),
+('Dance With Her Own', 1, 116),
+('Troubles Of My Inner Fire', 2, 203),
+('Time Fireworks', 2, 152),
+('Magic Circus', 3, 105),
+('Honey, So Do I', 3, 207),
+("Sweetie, Let's Go Wild", 3, 139),
+('She Knows', 3, 244),
+('Fantasy For Me', 4, 100),
+('Celebration Of More', 4, 146),
+('Rock His Everything', 4, 223),
+('Home Forever', 4, 231),
+('Diamond Power', 4, 241),
+("Let's Be Silly", 4, 132),
+('Thang Of Thunder', 5, 240),
+('Words Of Her Life', 5, 185),
+('Without My Streets', 5, 176),
+('Need Of The Evening', 6, 190),
+('History Of My Roses', 6, 222),
+('Without My Love', 6, 111),
+('Walking And Game', 6, 123),
+('Young And Father', 6, 197),
+('Finding My Traditions', 7, 179),
+('Walking And Man', 7, 229),
+('Hard And Time', 7, 135),
+("Honey, I'm A Lone Wolf", 7, 150),
+("She Thinks I Won't Stay Tonight", 8, 166),
+("He Heard You're Bad For Me", 8, 154),
+("He Hopes We Can't Stay", 8, 210),
+('I Know I Know', 8, 117),
+("He's Walking Away", 9, 159),
+("He's Trouble", 9, 138),
+('I Heard I Want To Bo Alone', 9, 120),
+('I Ride Alone', 9, 151),
+('Honey', 10, 79),
+('You Cheated On Me', 10, 95),
+("Wouldn't It Be Nice", 10, 213),
+('Baby', 10, 136),
+('You Make Me Feel So..', 10, 83);
 
 INSERT INTO SpotifyClone.albuns (album, artista_id, ano_lancamento)
 VALUES
