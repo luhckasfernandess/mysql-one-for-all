@@ -1,7 +1,7 @@
 SELECT 
     art.artista AS artista,
     alb.album AS album,
-    COUNT(seg.usuario_id) AS seguidores
+    COUNT(DISTINCT seg.usuario_id) AS seguidores
 FROM
     SpotifyClone.artistas AS art
         INNER JOIN
