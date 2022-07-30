@@ -31,20 +31,20 @@ CREATE TABLE SpotifyClone.albuns (
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.seguidores (
-    usuario_id INT NOT NULL,
     artista_id INT NOT NULL,
-    FOREIGN KEY (usuario_id)
-        REFERENCES SpotifyClone.usuarios (usuario_id),
+    usuario_id INT NOT NULL,
     FOREIGN KEY (artista_id)
         REFERENCES SpotifyClone.artistas (artista_id),
+    FOREIGN KEY (usuario_id)
+        REFERENCES SpotifyClone.usuarios (usuario_id),
     CONSTRAINT PRIMARY KEY (usuario_id , artista_id)
 )  ENGINE=INNODB;
 
 CREATE TABLE SpotifyClone.cancoes (
     cancao_id INT PRIMARY KEY AUTO_INCREMENT,
     cancao VARCHAR(50) NOT NULL,
-    album_id INT NOT NULL,
     duracao_segundos INT NOT NULL,
+    album_id INT NOT NULL,
     FOREIGN KEY (album_id)
         REFERENCES SpotifyClone.albuns (album_id)
 )  ENGINE=INNODB;
@@ -102,73 +102,73 @@ VALUES
 ('No guarantees', 5, 2015),
 ('Apparatus', 6, 2015);
 
-INSERT INTO SpotifyClone.seguidores (usuario_id, artista_id)
+INSERT INTO SpotifyClone.seguidores (artista_id, usuario_id)
 VALUES
 (1, 1),
-(1, 4),
-(1, 3),
-(2, 1),
-(2, 3),
-(3, 2),
+(4, 1),
 (3, 1),
+(1, 2),
+(3, 2),
+(2, 3),
+(1, 3),
 (4, 4),
 (5, 5),
-(5, 6),
+(6, 5),
 (6, 6),
-(6, 3),
-(6, 1),
-(7, 2),
-(7, 5),
-(8, 1),
-(8, 5),
-(9, 6),
-(9, 4),
-(9, 3),
-(10, 2),
-(10, 6);
+(3, 6),
+(1, 6),
+(2, 7),
+(5, 7),
+(1, 8),
+(5, 8),
+(6, 9),
+(4, 9),
+(3, 9),
+(2, 10),
+(6, 10);
 
-INSERT INTO SpotifyClone.cancoes (cancao, album_id, duracao_segundos)
+INSERT INTO SpotifyClone.cancoes (cancao, duracao_segundos, album_id)
 VALUES
-('Soul For Us', 1, 200),
-('Reflections Of Magic', 1, 163),
-('Dance With Her Own', 1, 116),
-('Troubles Of My Inner Fire', 2, 203),
-('Time Fireworks', 2, 152),
-('Magic Circus', 3, 105),
-('Honey, So Do I', 3, 207),
-("Sweetie, Let's Go Wild", 3, 139),
-('She Knows', 3, 244),
-('Fantasy For Me', 4, 100),
-('Celebration Of More', 4, 146),
-('Rock His Everything', 4, 223),
-('Home Forever', 4, 231),
-('Diamond Power', 4, 241),
-("Let's Be Silly", 4, 132),
-('Thang Of Thunder', 5, 240),
-('Words Of Her Life', 5, 185),
-('Without My Streets', 5, 176),
-('Need Of The Evening', 6, 190),
-('History Of My Roses', 6, 222),
-('Without My Love', 6, 111),
-('Walking And Game', 6, 123),
-('Young And Father', 6, 197),
-('Finding My Traditions', 7, 179),
-('Walking And Man', 7, 229),
-('Hard And Time', 7, 135),
-("Honey, I'm A Lone Wolf", 7, 150),
-("She Thinks I Won't Stay Tonight", 8, 166),
-("He Heard You're Bad For Me", 8, 154),
-("He Hopes We Can't Stay", 8, 210),
-('I Know I Know', 8, 117),
-("He's Walking Away", 9, 159),
-("He's Trouble", 9, 138),
-('I Heard I Want To Bo Alone', 9, 120),
-('I Ride Alone', 9, 151),
-('Honey', 10, 79),
-('You Cheated On Me', 10, 95),
-("Wouldn't It Be Nice", 10, 213),
-('Baby', 10, 136),
-('You Make Me Feel So..', 10, 83);
+('Soul For Us', 200, 1),
+('Reflections Of Magic', 163, 1),
+('Dance With Her Own', 116, 1),
+('Troubles Of My Inner Fire', 203, 2),
+('Time Fireworks', 152, 2),
+('Magic Circus', 105, 3),
+('Honey, So Do I', 207, 3),
+("Sweetie, Let's Go Wild", 139, 3),
+('She Knows', 244, 3),
+('Fantasy For Me', 100, 4),
+('Celebration Of More', 146, 4),
+('Rock His Everything', 223, 4),
+('Home Forever', 231, 4),
+('Diamond Power', 241, 4),
+("Let's Be Silly", 132, 4),
+('Thang Of Thunder', 240, 5),
+('Words Of Her Life', 185, 5),
+('Without My Streets', 176, 5),
+('Need Of The Evening', 190, 6),
+('History Of My Roses', 222, 6),
+('Without My Love', 111, 6),
+('Walking And Game', 123, 6),
+('Young And Father', 197, 6),
+('Finding My Traditions', 179, 7),
+('Walking And Man', 229, 7),
+('Hard And Time', 135, 7),
+("Honey, I'm A Lone Wolf", 150, 7),
+("She Thinks I Won't Stay Tonight", 166, 8),
+("He Heard You're Bad For Me", 154, 8),
+("He Hopes We Can't Stay", 210, 8),
+('I Know I Know', 117, 8),
+("He's Walking Away", 159, 9),
+("He's Trouble", 138, 9),
+('I Heard I Want To Bo Alone', 120, 9),
+('I Ride Alone', 151, 9),
+('Honey', 79, 10),
+('You Cheated On Me', 95, 10),
+("Wouldn't It Be Nice", 213, 10),
+('Baby', 136, 10),
+('You Make Me Feel So..', 83, 10);
 
 INSERT INTO SpotifyClone.albuns (album, artista_id, ano_lancamento)
 VALUES
